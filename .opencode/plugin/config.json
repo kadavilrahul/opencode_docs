@@ -1,0 +1,36 @@
+{
+  "readme_generator": {
+    "git_url_extraction": {
+      "description": "Instructions to fetch GitHub URL from git remote",
+      "steps": [
+        {
+          "step": 1,
+          "command": "git remote -v",
+          "description": "Get all git remotes with their URLs"
+        },
+        {
+          "step": 2,
+          "command": "grep -o 'github\\.com[:/][^/]*\\/[^/ ]*'",
+          "description": "Extract GitHub domain and repository path"
+        },
+        {
+          "step": 3,
+          "command": "head -1",
+          "description": "Take the first matching remote"
+        },
+        {
+          "step": 4,
+          "command": "sed 's|github\\.com[:/]|https://github.com/|'",
+          "description": "Convert to standard HTTPS URL format"
+        }
+      ],
+      "full_command": "git remote -v | grep -o 'github\\.com[:/][^/]*\\/[^/ ]*' | head -1 | sed 's|github\\.com[:/]|https://github.com/|'",
+      "output_format": "https://github.com/{username}/{repository}",
+      "usage": "This command extracts the GitHub URL from git remote configuration and converts it to standard HTTPS format"
+    },
+    "readme_sections": {
+      "first_section": "GitHub repository URL will be placed here after extraction",
+      "template": "Repository: {github_url}"
+    }
+  }
+}

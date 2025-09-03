@@ -7,25 +7,26 @@ export const ReadmeGenerator = async ({ $, worktree, directory }) => {
       console.log("🔍 Generating GitHub URL...")
       const urlResult = await $`cd ${worktree} && git remote -v | grep -o 'github\\.com[:/][^/]*\\/[^/ ]*' | head -1 | sed 's|github\\.com[:/]|https://github.com/|'`.quiet().text()
       
-      let githubUrl = "https://github.com/username/repository"
-      let repoPath = "username/repository"
-      let repoName = "project"
-      
-      if (urlResult.trim()) {
-        githubUrl = urlResult.trim()
-        console.log(`✨ ${githubUrl}`)
-        // Extract repo path and name from URL
-        repoPath = githubUrl.replace("https://github.com/", "")
-        repoName = repoPath.split('/')[1] || "project"
-      } else {
-        console.log("❌ No GitHub remote found")
+      if (!urlResult.trim()) {
+        console.log("❌ No GitHub remote found - cannot generate README without git repository")
+        console.log("💡 Initialize git and add remote: git remote add origin <github-url>")
+        return false
       }
+      
+      const githubUrl = urlResult.trim()
+      console.log(`✨ ${githubUrl}`)
+      
+      // Extract repo path and name from actual URL
+      const repoPath = githubUrl.replace("https://github.com/", "")
+      const repoName = repoPath.split('/')[1]
       
       // Get current directory name
       const dirName = directory.split('/').pop() || repoName
       
       // Generate README content based on template structure
       const readme = `# ${dirName.replace(/_/g, ' ').replace(/-/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+
+📍 **Repository:** ${githubUrl}
 
 Automated project setup and development tools.
 
@@ -127,8 +128,9 @@ bash run.sh
 ---
 Generated with README Generator Plugin`
       
-      // Write the README file
-      await $`echo ${readme} > ${worktree}/README.md`.quiet()
+      // Write the README file using a safer method
+      const fs = await import('fs')
+      fs.writeFileSync(`${worktree}/README.md`, readme)
       
       console.log(`\n✅ README.md generated successfully!`)
       console.log(`📍 Location: ${worktree}/README.md`)
