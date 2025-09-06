@@ -1,0 +1,79 @@
+Setting Up Editor for opencode
+================================
+
+The /editor command in opencode allows you to open an external text editor from within the opencode interface.
+
+How to Configure
+-----------------
+Set the EDITOR environment variable to your preferred text editor.
+
+Temporary Setup (Current Session Only)
+---------------------------------------
+export EDITOR="your-editor-here"
+opencode
+
+Permanent Setup
+---------------
+Add the export command to your shell configuration file:
+
+For Bash (~/.bashrc):
+  echo 'export EDITOR="your-editor-here"' >> ~/.bashrc
+  source ~/.bashrc
+
+For Zsh (~/.zshrc):
+  echo 'export EDITOR="your-editor-here"' >> ~/.zshrc
+  source ~/.zshrc
+
+For Fish (~/.config/fish/config.fish):
+  echo 'set -x EDITOR "your-editor-here"' >> ~/.config/fish/config.fish
+  source ~/.config/fish/config.fish
+
+Common Editor Values
+--------------------
+Terminal Editors:
+  export EDITOR="vim"           # Vim
+  export EDITOR="nvim"          # Neovim
+  export EDITOR="nano"          # Nano
+  export EDITOR="emacs -nw"     # Emacs in terminal
+  export EDITOR="hx"            # Helix
+  export EDITOR="micro"         # Micro
+
+GUI Editors (requires --wait flag):
+  export EDITOR="code --wait"          # VS Code
+  export EDITOR="subl --wait"          # Sublime Text
+  export EDITOR="atom --wait"          # Atom
+  export EDITOR="gedit --wait"         # Gedit
+  export EDITOR="notepad++ -multiInst" # Notepad++ (Windows)
+
+Important Notes
+---------------
+1. GUI editors need the --wait flag to make the terminal wait until you close the editor
+2. The editor command must be in your system PATH
+3. After setting EDITOR, restart opencode or start a new terminal session
+4. Test with: echo $EDITOR to verify the setting
+
+Using the /editor Command
+-------------------------
+Once configured, in opencode you can:
+1. Type /editor to open your configured editor
+2. Make your changes in the editor
+3. Save and close the editor
+4. The content will be inserted into your opencode prompt
+
+Troubleshooting
+---------------
+- "No EDITOR set" error: The EDITOR variable is not configured
+- Editor doesn't open: Check if the editor command is installed and in PATH
+- Editor opens but doesn't wait: Add the --wait flag for GUI editors
+- Changes don't appear in opencode: Make sure to save before closing the editor
+
+Example: Setting VS Code as Default
+------------------------------------
+# Add to ~/.bashrc or ~/.zshrc:
+export EDITOR="code --wait"
+
+# Apply changes:
+source ~/.bashrc  # or source ~/.zshrc
+
+# Test:
+echo $EDITOR  # Should output: code --wait

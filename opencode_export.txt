@@ -1,0 +1,94 @@
+Exporting Chat History from opencode
+=====================================
+
+opencode provides several ways to save and share your conversations.
+
+/share Command - Create Shareable Links
+----------------------------------------
+The primary way to export conversations is using the /share command:
+
+Usage:
+  /share
+
+What it does:
+- Creates a shareable web link to the current conversation
+- Automatically copies the link to your clipboard
+- The link can be accessed by anyone you share it with
+- Example link format: https://opencode.ai/s/4XP1fce5
+
+Note: Conversations are not shared by default - you must explicitly use /share
+
+/export Command - Export to Editor
+-----------------------------------
+Once you have configured an editor (see opencode_editor.txt), you can use:
+
+Usage:
+  /export
+
+What it does:
+- Opens your configured editor with the chat history
+- Allows you to save the conversation locally in any format
+- Useful for creating documentation or keeping offline records
+
+Prerequisites:
+1. Set up your EDITOR environment variable (see opencode_editor.txt)
+2. Example: export EDITOR="code --wait" for VS Code
+
+Storage Location
+----------------
+Chat history is stored internally at:
+~/.local/share/opencode/storage/
+
+Structure:
+- session/   - Session metadata (ID, title, timestamps)
+- message/   - Message metadata (role, timestamps)
+- part/      - Actual message text content
+
+Note: These are internal JSON files not designed for manual export
+
+Other Export Methods
+--------------------
+1. Terminal Copy/Paste:
+   - Select and copy text directly from your terminal
+   - Works if your terminal supports scrollback
+
+2. Terminal Logging:
+   - Start opencode with output redirection:
+     opencode | tee conversation.log
+   - Or use terminal recording tools like script or asciinema
+
+3. Manual JSON Export (Advanced):
+   - Navigate to ~/.local/share/opencode/storage/
+   - Parse JSON files in session/, message/, and part/ directories
+   - Requires scripting to reconstruct conversations
+
+Configuration Options
+---------------------
+In your opencode.json config file, you can set sharing preferences:
+
+{
+  "$schema": "https://opencode.ai/config.json",
+  "share": "manual"  // Options: "manual", "auto", "disabled"
+}
+
+- "manual": Allow manual sharing via /share command (default)
+- "auto": Automatically share new conversations
+- "disabled": Disable sharing entirely
+
+Best Practices
+--------------
+1. Use /share for quick sharing with team members
+2. Use /export to save important conversations locally
+3. Consider privacy before sharing conversations with sensitive information
+4. Keep exported conversations organized by project or date
+
+Limitations
+-----------
+- No built-in batch export for multiple conversations
+- Shared links require internet access to view
+- Internal storage format may change between versions
+
+Feature Requests
+----------------
+For additional export features, submit requests at:
+https://github.com/sst/opencode/issues
