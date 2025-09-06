@@ -23,7 +23,6 @@ cd opencode_docs
 ```
 
 ```bash
-# Run setup or main script
 bash run.sh
 ```
 
