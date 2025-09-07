@@ -2,34 +2,6 @@
 
 Comprehensive documentation and AI agent suite for OpenCode, featuring specialized integration agents that solve integration blindness in AI code editors.
 
-## ⚠️ **IMPORTANT NOTICE**
-
-**This project contains advanced AI agent configurations for OpenCode.**
-
-- ✅ **Integration Agents**: Prevent and solve integration blindness in AI code editors
-- ✅ **Documentation**: Complete OpenCode documentation and guides
-- ✅ **Scripts**: Analysis and validation tools for codebases
-- 📋 **Requirements**: OpenCode CLI installed
-
-## 🎯 Key Features
-
-### AI Agent Suite
-A comprehensive collection of 10 specialized AI agents for OpenCode:
-
-**Integration Agents** (8) - Solve integration blindness:
-- **Integration Guardian** - Master orchestrator (primary agent)
-- **Context Mapper** - Maps codebase structure and dependencies
-- **Integration Validator** - Validates code before integration
-- **Architectural Compliance** - Ensures design pattern adherence
-- **Cross-Component Tester** - Generates integration tests
-- **Refactoring Coordinator** - Manages multi-file refactoring
-- **Documentation Synchronizer** - Keeps docs in sync with code
-- **Flowchart Generator** - Creates actual flowcharts from code analysis
-
-**Documentation Agents** (2):
-- **README Generator** - Creates comprehensive project documentation
-- **Run Generator** - Generates executable run.sh scripts
-
 ## 🚀 Installation & Setup
 
 ### Method 1: Clone and Use Directly
@@ -162,6 +134,33 @@ opencode_docs/
 ├── AGENTS.md                     # Detailed agent documentation
 └── *.txt                         # OpenCode documentation files
 ```
+## ⚠️ **IMPORTANT NOTICE**
+
+**This project contains advanced AI agent configurations for OpenCode.**
+
+- ✅ **Integration Agents**: Prevent and solve integration blindness in AI code editors
+- ✅ **Documentation**: Complete OpenCode documentation and guides
+- ✅ **Scripts**: Analysis and validation tools for codebases
+- 📋 **Requirements**: OpenCode CLI installed
+
+## 🎯 Key Features
+
+### AI Agent Suite
+A comprehensive collection of 10 specialized AI agents for OpenCode:
+
+**Integration Agents** (8) - Solve integration blindness:
+- **Integration Guardian** - Master orchestrator (primary agent)
+- **Context Mapper** - Maps codebase structure and dependencies
+- **Integration Validator** - Validates code before integration
+- **Architectural Compliance** - Ensures design pattern adherence
+- **Cross-Component Tester** - Generates integration tests
+- **Refactoring Coordinator** - Manages multi-file refactoring
+- **Documentation Synchronizer** - Keeps docs in sync with code
+- **Flowchart Generator** - Creates actual flowcharts from code analysis
+
+**Documentation Agents** (2):
+- **README Generator** - Creates comprehensive project documentation
+- **Run Generator** - Generates executable run.sh scripts
 
 ## 🛡️ Integration Blindness Solution
 
