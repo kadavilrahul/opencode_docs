@@ -179,11 +179,36 @@
       "model": "anthropic/claude-sonnet-3-5-20241022",
       "temperature": 0.3,
       "prompt": "{file:./.opencode/agent/run-generator.md}"
+    },
+    "flowchart-generator": {
+      "description": "Generates actual flowcharts from code analysis to visualize data flow and execution paths",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.1,
+      "prompt": "{file:./.opencode/agent/flowchart-generator.md}",
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "list": true,
+        "bash": true,
+        "write": true,
+        "edit": false
+      },
+      "permission": {
+        "bash": {
+          "*": "allow",
+          "rm *": "deny",
+          "git push": "deny"
+        }
+      }
     }
   },
   "scripts": {
     "analyze": "./scripts/analyze_codebase.sh",
-    "check": "./scripts/check_integration.sh"
+    "check": "./scripts/check_integration.sh",
+    "flowchart": "./scripts/generate_flowchart.sh",
+    "functions": "./scripts/collect_functions.sh"
   },
   "settings": {
     "autoAnalyze": true,

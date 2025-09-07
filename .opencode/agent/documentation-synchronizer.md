@@ -228,17 +228,21 @@ sphinx-apidoc -o docs/api src/
 
 ### Generate Architecture Diagrams
 ```bash
-# Generate flowchart/architecture diagram
-bash ./scripts/flowchart.sh .
-
 # Generate dependency graph
 npx madge --image deps.svg src/
 
 # Create component diagram
 npx arkit -o architecture.svg src/
 
-# Generate PlantUML diagrams
+# Generate PlantUML diagrams from actual code structure
 plantuml -tsvg docs/diagrams/*.puml
+
+# For Python projects, use pyreverse
+pyreverse -o png -p ProjectName src/
+
+# Generate call graphs
+npx js-callgraph src/index.js > callgraph.dot
+dot -Tpng callgraph.dot -o callgraph.png
 ```
 
 ### Generate Markdown from Code
@@ -433,9 +437,9 @@ echo "Generating comprehensive documentation..."
 echo "Generating API documentation..."
 npx documentation build src/api/** -f md -o docs/api.md
 
-# Generate architecture diagram
+# Generate architecture diagrams using actual code analysis tools
 echo "Creating architecture diagrams..."
-bash ./scripts/flowchart.sh .
+npx madge --image docs/dependencies.svg src/ 2>/dev/null || echo "Skipping dependency graph"
 
 # Update changelog
 echo "Updating changelog..."

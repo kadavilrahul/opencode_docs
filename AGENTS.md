@@ -162,6 +162,40 @@ opencode --agent integration-guardian
 @run-generator create a run script for this project
 ```
 
+### Visualization Subagent
+
+#### 📊 Flowchart Generator
+**Mode**: Subagent  
+**Purpose**: Generates actual flowcharts and diagrams from code analysis  
+**Capabilities**:
+- Analyzes real code structure (not generic templates)
+- Creates execution flow diagrams
+- Maps data flow through the system
+- Visualizes component interactions
+- Generates API sequence diagrams
+- Creates function call graphs
+- Maps state transitions
+
+**Diagram Types Generated**:
+- Execution flow (Mermaid)
+- Data flow diagrams (Mermaid)
+- Component interaction (GraphViz DOT)
+- API sequences (Mermaid)
+- Call graphs (GraphViz DOT)
+- State diagrams (Mermaid)
+
+**Invocation**:
+```
+@flowchart-generator analyze and create flowcharts for this codebase
+```
+
+**Why This Reduces Integration Blindness**:
+- Makes implicit code relationships explicit
+- Visualizes hidden dependencies
+- Shows actual execution paths
+- Helps humans explain system to AI
+- Reveals integration points clearly
+
 ## 🔧 Supporting Scripts
 
 ### analyze_codebase.sh
@@ -202,6 +236,35 @@ Validates integration health:
 - Documentation freshness
 
 **Output**: Detailed report with issues and warnings
+
+### generate_flowchart.sh
+Generates actual flowcharts from code analysis:
+```bash
+./scripts/generate_flowchart.sh [project_dir] [output_dir] [verbose]
+```
+
+**Generates**:
+- Execution flow diagrams
+- Data flow visualizations
+- Component interaction graphs
+- API sequence diagrams
+- Function call graphs
+- State transition diagrams
+
+**Output**: Mermaid (.mmd) and GraphViz (.dot) diagram files
+
+### collect_functions.sh
+Extracts function definitions from code:
+```bash
+./scripts/collect_functions.sh
+```
+
+**Methods**:
+- grep for quick extraction
+- ctags for comprehensive indexing
+- AST parsing for Python
+
+**Output**: functions.txt with all function definitions
 
 ## 🎯 Integration Workflows
 

@@ -16,7 +16,7 @@ Comprehensive documentation and AI agent suite for OpenCode, featuring specializ
 ### AI Agent Suite
 A comprehensive collection of 9 specialized AI agents for OpenCode:
 
-**Integration Agents** (7) - Solve integration blindness:
+**Integration Agents** (8) - Solve integration blindness:
 - **Integration Guardian** - Master orchestrator (primary agent)
 - **Context Mapper** - Maps codebase structure and dependencies
 - **Integration Validator** - Validates code before integration
@@ -24,6 +24,7 @@ A comprehensive collection of 9 specialized AI agents for OpenCode:
 - **Cross-Component Tester** - Generates integration tests
 - **Refactoring Coordinator** - Manages multi-file refactoring
 - **Documentation Synchronizer** - Keeps docs in sync with code
+- **Flowchart Generator** - Creates actual flowcharts from code analysis
 
 **Documentation Agents** (2):
 - **README Generator** - Creates comprehensive project documentation
@@ -124,6 +125,20 @@ Our Integration Agent Suite provides:
 
 ## 🔧 Utility Scripts
 
+### Generate Flowcharts (NEW)
+```bash
+./scripts/generate_flowchart.sh [project_dir] [output_dir]
+```
+Creates actual flowcharts from code analysis:
+- Execution flow diagrams
+- Data flow visualizations  
+- Component interaction graphs
+- API sequence diagrams
+- Function call graphs
+- State transition diagrams
+
+**This helps reduce integration blindness by visualizing actual code relationships**
+
 ### Analyze Codebase
 ```bash
 ./scripts/analyze_codebase.sh [project_dir]
@@ -195,8 +210,8 @@ Impact Analysis → Refactoring Plan → Validation → Testing → Documentatio
 ├── scripts/                      # Utility and analysis scripts
 │   ├── analyze_codebase.sh      # Comprehensive codebase analysis
 │   ├── check_integration.sh     # Integration health validation
-│   ├── collect_functions.sh     # Function collection utility
-│   └── flowchart.sh             # Architecture diagram generator
+│   ├── generate_flowchart.sh    # Real flowchart generation from code
+│   └── collect_functions.sh     # Function collection utility
 ├── opencode.json                 # Main configuration file
 ├── AGENTS.md                     # Detailed agent documentation
 ├── README.md                     # This file
@@ -214,6 +229,7 @@ Impact Analysis → Refactoring Plan → Validation → Testing → Documentatio
 | cross-component-tester | Subagent | Generates integration tests |
 | refactoring-coordinator | Subagent | Manages refactoring |
 | documentation-synchronizer | Subagent | Syncs documentation |
+| flowchart-generator | Subagent | Creates actual flowcharts from code |
 | readme-generator | Subagent | Creates README files |
 | run-generator | Subagent | Creates run documentation |
 
