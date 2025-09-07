@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "description": "OpenCode Docs Configuration with Integration Agent Suite",
   "agent": {
     "integration-guardian": {
       "description": "Master orchestrator that coordinates all integration agents to prevent integration blindness",
@@ -54,20 +53,20 @@
         "edit": "deny"
       }
     },
-    "integration-validator": {
-      "description": "Validates new code against existing architecture to ensure seamless integration",
-      "mode": "subagent",
-      "model": "anthropic/claude-sonnet-3-5-20241022",
-      "temperature": 0.1,
-      "prompt": "{file:./.opencode/agent/integration-validator.md}",
-      "tools": {
-        "read": true,
-        "grep": true,
-        "glob": true,
-        "bash": true,
-        "edit": "ask",
-        "write": "ask"
-      },
+     "integration-validator": {
+       "description": "Validates new code against existing architecture to ensure seamless integration",
+       "mode": "subagent",
+       "model": "anthropic/claude-sonnet-3-5-20241022",
+       "temperature": 0.1,
+       "prompt": "{file:./.opencode/agent/integration-validator.md}",
+       "tools": {
+         "read": true,
+         "grep": true,
+         "glob": true,
+         "bash": true,
+         "edit": false,
+         "write": false
+       },
       "permission": {
         "edit": "ask",
         "bash": {
@@ -77,20 +76,20 @@
         }
       }
     },
-    "architectural-compliance": {
-      "description": "Ensures code follows established architectural patterns and design principles",
-      "mode": "subagent",
-      "model": "anthropic/claude-sonnet-3-5-20241022",
-      "temperature": 0.1,
-      "prompt": "{file:./.opencode/agent/architectural-compliance.md}",
-      "tools": {
-        "read": true,
-        "grep": true,
-        "glob": true,
-        "bash": true,
-        "edit": "ask",
-        "write": "ask"
-      },
+     "architectural-compliance": {
+       "description": "Ensures code follows established architectural patterns and design principles",
+       "mode": "subagent",
+       "model": "anthropic/claude-sonnet-3-5-20241022",
+       "temperature": 0.1,
+       "prompt": "{file:./.opencode/agent/architectural-compliance.md}",
+       "tools": {
+         "read": true,
+         "grep": true,
+         "glob": true,
+         "bash": true,
+         "edit": false,
+         "write": false
+       },
       "permission": {
         "edit": "ask",
         "bash": {
@@ -203,27 +202,5 @@
         }
       }
     }
-  },
-  "scripts": {
-    "analyze": "./scripts/analyze_codebase.sh",
-    "check": "./scripts/check_integration.sh",
-    "flowchart": "./scripts/generate_flowchart.sh",
-    "functions": "./scripts/collect_functions.sh"
-  },
-  "settings": {
-    "autoAnalyze": true,
-    "preCommitValidation": true,
-    "integrationTestGeneration": true,
-    "documentationSync": true,
-    "architecturalCompliance": true,
-    "duplicateDetection": true,
-    "refactoringAssistance": true
-  },
-  "thresholds": {
-    "codeDuplication": 5,
-    "testCoverage": 80,
-    "documentationAge": 30,
-    "complexityLimit": 10,
-    "dependencyDepth": 5
   }
 }

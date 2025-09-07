@@ -8,10 +8,10 @@ tools:
   grep: true
   glob: true
   bash: true
-  edit: "ask"
-  write: "ask"
+  edit: false
+  write: false
 permission:
-  edit: "ask"
+  edit: "deny"
   bash:
     "*": "allow"
     "rm *": "deny"

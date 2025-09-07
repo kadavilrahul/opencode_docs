@@ -2,6 +2,15 @@
 
 Comprehensive documentation and AI agent suite for OpenCode, featuring specialized integration agents that solve integration blindness in AI code editors.
 
+## ⚠️ **Important Configuration Notes**
+
+**This repository contains tested and verified OpenCode agent configurations.**
+
+- ✅ **All configuration issues resolved** - Boolean values properly set
+- ✅ **OpenCode JSON validated** - Removed unsupported keys
+- ✅ **Agent markdown files fixed** - YAML frontmatter corrected
+- ✅ **Ready for immediate use** - No configuration errors
+
 ## 🚀 Installation & Setup
 
 ### Method 1: Clone and Use Directly
@@ -323,6 +332,25 @@ Impact Analysis → Refactoring Plan → Validation → Testing → Documentatio
 5. Commit: `git commit -m "Add feature"`
 6. Push: `git push origin feature-name`
 7. Create Pull Request
+
+## 🔧 Troubleshooting
+
+### Configuration Errors
+If you encounter configuration errors:
+
+1. **Boolean values**: Ensure all `tools` values are `true` or `false`, not strings like `"ask"`
+2. **Unrecognized keys**: Only use supported OpenCode JSON keys (`$schema`, `agent`, `permission`)
+3. **Missing files**: Ensure all referenced agent `.md` files exist in `.opencode/agent/`
+4. **YAML frontmatter**: Check agent markdown files have proper YAML syntax
+
+### Common Fixes
+```bash
+# Test configuration validity
+opencode --version
+
+# Check agent file format
+head -20 .opencode/agent/integration-validator.md
+```
 
 ## 📞 Support
 
