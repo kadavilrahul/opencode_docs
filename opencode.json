@@ -1,0 +1,204 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "description": "OpenCode Docs Configuration with Integration Agent Suite",
+  "agent": {
+    "integration-guardian": {
+      "description": "Master orchestrator that coordinates all integration agents to prevent integration blindness",
+      "mode": "primary",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.1,
+      "prompt": "{file:./.opencode/agent/integration-guardian.md}",
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": true,
+        "write": true,
+        "edit": true,
+        "task": true,
+        "todowrite": true,
+        "todoread": true
+      },
+      "permission": {
+        "bash": {
+          "*": "allow",
+          "rm -rf /": "deny",
+          "git push": "ask"
+        },
+        "edit": "allow",
+        "webfetch": "ask"
+      }
+    },
+    "context-mapper": {
+      "description": "Maps and maintains comprehensive understanding of codebase structure and dependencies",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.1,
+      "prompt": "{file:./.opencode/agent/context-mapper.md}",
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "list": true,
+        "bash": true,
+        "write": true,
+        "edit": false,
+        "webfetch": false
+      },
+      "permission": {
+        "bash": {
+          "*": "allow",
+          "rm *": "deny",
+          "git push": "deny"
+        },
+        "edit": "deny"
+      }
+    },
+    "integration-validator": {
+      "description": "Validates new code against existing architecture to ensure seamless integration",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.1,
+      "prompt": "{file:./.opencode/agent/integration-validator.md}",
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": true,
+        "edit": "ask",
+        "write": "ask"
+      },
+      "permission": {
+        "edit": "ask",
+        "bash": {
+          "*": "allow",
+          "rm *": "deny",
+          "git push": "deny"
+        }
+      }
+    },
+    "architectural-compliance": {
+      "description": "Ensures code follows established architectural patterns and design principles",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.1,
+      "prompt": "{file:./.opencode/agent/architectural-compliance.md}",
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": true,
+        "edit": "ask",
+        "write": "ask"
+      },
+      "permission": {
+        "edit": "ask",
+        "bash": {
+          "*": "allow",
+          "rm *": "deny"
+        }
+      }
+    },
+    "cross-component-tester": {
+      "description": "Generates and executes integration tests to verify component interactions",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.2,
+      "prompt": "{file:./.opencode/agent/cross-component-tester.md}",
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": true,
+        "write": true,
+        "edit": true
+      },
+      "permission": {
+        "bash": {
+          "*": "allow",
+          "rm -rf /": "deny",
+          "git push": "ask"
+        }
+      }
+    },
+    "refactoring-coordinator": {
+      "description": "Manages and coordinates refactoring across multiple files while maintaining system integrity",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.1,
+      "prompt": "{file:./.opencode/agent/refactoring-coordinator.md}",
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": true,
+        "write": true,
+        "edit": true
+      },
+      "permission": {
+        "bash": {
+          "*": "allow",
+          "git push": "ask",
+          "rm -rf": "deny"
+        }
+      }
+    },
+    "documentation-synchronizer": {
+      "description": "Maintains synchronized documentation across code changes and architectural evolution",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.3,
+      "prompt": "{file:./.opencode/agent/documentation-synchronizer.md}",
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": true,
+        "write": true,
+        "edit": true,
+        "webfetch": false
+      },
+      "permission": {
+        "bash": {
+          "*": "allow",
+          "rm -rf": "deny",
+          "git push": "ask"
+        }
+      }
+    },
+    "readme-generator": {
+      "description": "Generates comprehensive README files for projects",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.3,
+      "prompt": "{file:./.opencode/agent/readme-generator.md}"
+    },
+    "run-generator": {
+      "description": "Generates run.md documentation for executable projects",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-3-5-20241022",
+      "temperature": 0.3,
+      "prompt": "{file:./.opencode/agent/run-generator.md}"
+    }
+  },
+  "scripts": {
+    "analyze": "./scripts/analyze_codebase.sh",
+    "check": "./scripts/check_integration.sh"
+  },
+  "settings": {
+    "autoAnalyze": true,
+    "preCommitValidation": true,
+    "integrationTestGeneration": true,
+    "documentationSync": true,
+    "architecturalCompliance": true,
+    "duplicateDetection": true,
+    "refactoringAssistance": true
+  },
+  "thresholds": {
+    "codeDuplication": 5,
+    "testCoverage": 80,
+    "documentationAge": 30,
+    "complexityLimit": 10,
+    "dependencyDepth": 5
+  }
+}

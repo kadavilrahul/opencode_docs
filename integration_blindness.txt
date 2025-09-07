@@ -1,0 +1,47 @@
+1. Definition of Integration Blindness
+
+Integration blindness refers to AI’s weakness in combining separate code fragments into a working, coherent large-scale system. While AI can generate isolated pieces correctly, it struggles with ensuring that those parts interact smoothly within the broader architecture.
+
+2. Strength of AI (Micro-Level Coding)
+
+AI is good at writing functions, snippets, and modules when given precise instructions. For example, it can generate a sorting algorithm, a login form, or an API call without major issues.
+
+3. Weakness of AI (Macro-Level Integration)
+
+When multiple AI-generated pieces must work together, AI often misses cross-dependencies, data flow consistency, and shared state management, leading to misalignment.
+
+4. Symptom – "It Works, But Not Together"
+
+The code may compile or run without errors in isolation, but when plugged into the overall application, it either:
+
+Breaks existing flows
+
+Doesn’t fit architectural standards
+
+Causes silent logical mismatches
+
+5. Example in Practice
+
+Suppose AI writes a user authentication module. It works independently, but:
+
+It may not align with the project’s chosen ORM/database structure.
+
+Error handling might differ from the global exception strategy.
+
+It might duplicate logic already implemented elsewhere.
+
+6. Underlying Cause
+
+AI lacks global project context. It sees prompts in isolation and doesn’t "understand" the entire codebase’s architecture, design patterns, or long-term maintainability goals.
+
+7. Risk of Technical Debt
+
+If integration blindness is unchecked, it leads to:
+
+Code duplication
+
+Inconsistent naming/structures
+
+Fragile systems that break under scaling
+
+Higher debugging and maintenance costs
