@@ -14,7 +14,7 @@ Comprehensive documentation and AI agent suite for OpenCode, featuring specializ
 ## 🎯 Key Features
 
 ### AI Agent Suite
-A comprehensive collection of 9 specialized AI agents for OpenCode:
+A comprehensive collection of 10 specialized AI agents for OpenCode:
 
 **Integration Agents** (8) - Solve integration blindness:
 - **Integration Guardian** - Master orchestrator (primary agent)
@@ -30,31 +30,104 @@ A comprehensive collection of 9 specialized AI agents for OpenCode:
 - **README Generator** - Creates comprehensive project documentation
 - **Run Generator** - Generates executable run.sh scripts
 
-## 🚀 Quick Start
+## 🚀 Installation & Setup
 
-### Clone Repository
-
+### Method 1: Clone and Use Directly
 ```bash
+# Clone the repository
 git clone https://github.com/kadavilrahul/opencode_docs.git
 cd opencode_docs
+
+# Start using agents immediately
+opencode --agent integration-guardian
 ```
 
-### Using Integration Agents with OpenCode
-
-1. **For all projects (global installation):**
+### Method 2: Add to Existing Project
 ```bash
-cp -r .opencode/agent/* ~/.config/opencode/agent/
+# Clone to temporary directory
+git clone https://github.com/kadavilrahul/opencode_docs.git /tmp/opencode_docs
+# Remove git directory
+cd opencode_docs
+find . -name ".git" -type d -print0 | xargs -0 rm -rf
+
+
+# Copy agents and config to your project
+cp -r /tmp/opencode_docs/.opencode YOUR_PROJECT/
+cp /tmp/opencode_docs/opencode.json YOUR_PROJECT/
+
+# Copy scripts (optional but recommended)
+mkdir -p YOUR_PROJECT/scripts
+cp /tmp/opencode_docs/scripts/* YOUR_PROJECT/scripts/
+chmod +x YOUR_PROJECT/scripts/*.sh
+
+# Copy documentation (optional)
+cp /tmp/opencode_docs/AGENTS.md YOUR_PROJECT/
+
+# Navigate to your project and start using
+cd YOUR_PROJECT
+opencode --agent integration-guardian
+```
+
+### Method 3: Global Installation (All Projects)
+```bash
+# Clone the repository
+git clone https://github.com/kadavilrahul/opencode_docs.git
+cd opencode_docs
+
+# Install agents globally
+mkdir -p ~/.config/opencode/agent
+cp .opencode/agent/* ~/.config/opencode/agent/
+
+# Install global config
 cp opencode.json ~/.config/opencode/
+
+# Install scripts globally
+mkdir -p ~/bin
+cp scripts/* ~/bin/
+chmod +x ~/bin/*.sh
+
+# Now use in any project
+cd ANY_PROJECT
+opencode --agent integration-guardian
 ```
 
-2. **For current project only:**
+### Method 4: Selective Installation
 ```bash
-# The agents are already in .opencode/agent/ directory
-# Just use the opencode.json configuration
+# Clone the repository
+git clone https://github.com/kadavilrahul/opencode_docs.git
+
+# Choose what you need:
+
+# Just the integration agents (7 agents)
+cp opencode_docs/.opencode/agent/{integration-guardian,context-mapper,integration-validator,architectural-compliance,cross-component-tester,refactoring-coordinator,documentation-synchronizer}.md YOUR_PROJECT/.opencode/agent/
+
+# Just the visualization agent
+cp opencode_docs/.opencode/agent/flowchart-generator.md YOUR_PROJECT/.opencode/agent/
+
+# Just the documentation agents
+cp opencode_docs/.opencode/agent/{readme-generator,run-generator}.md YOUR_PROJECT/.opencode/agent/
+
+# Just the analysis scripts
+cp opencode_docs/scripts/{analyze_codebase.sh,check_integration.sh} YOUR_PROJECT/scripts/
+
+# Just the flowchart generator
+cp opencode_docs/scripts/generate_flowchart.sh YOUR_PROJECT/scripts/
 ```
 
-3. **Start using the Integration Guardian:**
+### Method 5: Git Submodule (Keep Updated)
 ```bash
+# In your project root
+git submodule add https://github.com/kadavilrahul/opencode_docs.git .opencode_integration
+
+# Create symbolic links
+ln -s .opencode_integration/.opencode .opencode
+ln -s .opencode_integration/opencode.json opencode.json
+ln -s .opencode_integration/scripts scripts
+
+# Update submodule when needed
+git submodule update --remote
+
+# Use the agents
 opencode --agent integration-guardian
 ```
 
@@ -64,7 +137,7 @@ opencode --agent integration-guardian
 ```
 opencode_docs/
 ├── .opencode/
-│   └── agent/                    # All agent configurations
+│   └── agent/                    # All 10 agent configurations
 │       ├── integration-guardian.md
 │       ├── context-mapper.md
 │       ├── integration-validator.md
@@ -72,12 +145,16 @@ opencode_docs/
 │       ├── cross-component-tester.md
 │       ├── refactoring-coordinator.md
 │       ├── documentation-synchronizer.md
+│       ├── flowchart-generator.md
 │       ├── readme-generator.md
 │       └── run-generator.md
-├── scripts/                      # Analysis and validation scripts
-│   ├── analyze_codebase.sh      # Comprehensive codebase analysis
-│   └── check_integration.sh     # Integration health validation
+├── scripts/                      # Analysis and utility scripts
+│   ├── analyze_codebase.sh
+│   ├── check_integration.sh
+│   ├── generate_flowchart.sh
+│   └── collect_functions.sh
 ├── opencode.json                 # Main configuration file
+├── AGENTS.md                     # Detailed agent documentation
 └── *.txt                         # OpenCode documentation files
 ```
 
