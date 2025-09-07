@@ -33,12 +33,17 @@ A comprehensive collection of 10 specialized AI agents for OpenCode:
 ## 🚀 Installation & Setup
 
 ### Method 1: Clone and Use Directly
-```bash
+
 # Clone the repository
+```bash
 git clone https://github.com/kadavilrahul/opencode_docs.git
+```
+```bash
 cd opencode_docs
+```
 
 # Start using agents immediately
+```bash
 opencode --agent integration-guardian
 ```
 
